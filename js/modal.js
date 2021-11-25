@@ -42,55 +42,14 @@ window.addEventListener("scroll", showModalByScroll);
 
 //form AJAX
 
-const forms = document.querySelectorAll("form");
-const message = {
-  loading: "../img/form/054 spinner.svg",
-  success: "done",
-  failure: "fail...",
-};
-forms.forEach((item) => postData(item));
+// const forms = document.querySelectorAll("form");
+// const message = {
+//   loading: "../img/form/054 spinner.svg",
+//   success: "done",
+//   failure: "fail...",
+// };
+// forms.forEach((item) => bindPostData(item));
 
-function postData(form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const statusMessage = document.createElement("img");
-    statusMessage.src = message.loading;
-    statusMessage.style.cssText = `
-    display: block;
-    margin: 0 auto`;
-    form.append(statusMessage);
-    form.insertAdjacentElement("afterend", statusMessage);
-
-    const request = new XMLHttpRequest();
-    request.open("POST", "/server.php");
-
-    request.setRequestHeader("Content-type", "application/json");
-    const formData = new FormData(form);
-
-    const object = {};
-    formData.forEach(function (value, key) {
-      object[key] = value;
-    });
-
-    const json = JSON.stringify(object);
-
-    request.send(json);
-
-    request.addEventListener("load", () => {
-      if (request.status === 200) {
-        console.log(request.response);
-        showThanksModal(message.success);
-        form.reset();
-        statusMessage.remove();
-      } else {
-        showThanksModal(message.failure);
-      }
-    });
-  });
-}
-
-// form fetch
 // function postData(form) {
 //   form.addEventListener("submit", (e) => {
 //     e.preventDefault();
@@ -103,17 +62,61 @@ function postData(form) {
 //     form.append(statusMessage);
 //     form.insertAdjacentElement("afterend", statusMessage);
 
+//     const request = new XMLHttpRequest();
+//     request.open("POST", "/server.php");
+
+//     request.setRequestHeader("Content-type", "application/json");
+//     const formData = new FormData(form);
+
 //     const object = {};
 //     formData.forEach(function (value, key) {
 //       object[key] = value;
 //     });
 
-//     fetch("server.php", {
-//       method: "POST",
-//       headers: { "Content-type": "application/json" },
-//       body: JSON.stringify(object), //formData
-//     })
-//       .then((data) => data.text())
+//     const json = JSON.stringify(object);
+
+//     request.send(json);
+
+//     request.addEventListener("load", () => {
+//       if (request.status === 200) {
+//         console.log(request.response);
+//         showThanksModal(message.success);
+//         form.reset();
+//         statusMessage.remove();
+//       } else {
+//         showThanksModal(message.failure);
+//       }
+//     });
+//   });
+// }
+
+// form fetch
+// const postData = async (url, data) => {
+//   const res = await fetch(url, {
+//     method: "POST",
+//     headers: { "Content-type": "application/json" },
+//     body: data,
+//   });
+
+//   return await res.json();
+// };
+// function bindPostData(form) {
+//   form.addEventListener("submit", (e) => {
+//     e.preventDefault();
+
+//     const statusMessage = document.createElement("img");
+//     statusMessage.src = message.loading;
+//     statusMessage.style.cssText = `
+//     display: block;
+//     margin: 0 auto`;
+//     form.append(statusMessage);
+//     form.insertAdjacentElement("afterend", statusMessage);
+
+//     const formData = new FormData(form);
+
+//     const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+//     postData("http://localhost:30000/request", json)
 //       .then((data) => {
 //         console.log(data);
 //         showThanksModal(message.success);
@@ -123,8 +126,9 @@ function postData(form) {
 //       .catch(() => {
 //         showThanksModal(message.failure);
 //       })
-//       .finform.reset();
-//     ally(() => {});
+//       .finally(() => {
+//         form.reset();
+//       });
 //   });
 // }
 
@@ -147,7 +151,7 @@ function showThanksModal(message) {
   setTimeout(() => {
     thanksModal.remove();
     prevModalDialog.classList.add("show");
-    prevModalDialog.classList.remove("hide ");
+    prevModalDialog.classList.remove("hide");
     closeModal();
   }, 4000);
 }
