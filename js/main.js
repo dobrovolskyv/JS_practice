@@ -36,3 +36,31 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+//regular
+
+// const ans = promt("entner ur name");
+// const reg = /n/ig;
+// console.log(reg.test(ans)); - true or false
+// const str = 'My name is R2D2'
+// console.log(str.match(/\w\d\w\d/i)); -найдет R2D2
+
+// обратные классы не
+// \D не числа
+// \W не буквы
+
+// \d- ищем цифры
+// \w-все слова ищем
+// \s- ищем все пробелы
+// i-первое значение выволит;
+// g-глабальный поиск;
+// m;
+// console.log(ans.search(reg));
+// console.log(ans.match(reg));
+
+// const pass = promt("Password");
+// console.log(pass.replace(/./g, "*"));
+// . - все жлементы которые попадут в строку
+// *-все символы заменяем на зведочку
+
+// log('12-34-56'.replace(/-/g), ":") -- 12:34:56
